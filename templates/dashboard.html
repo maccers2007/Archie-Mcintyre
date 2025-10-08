@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Dashboard</h2>
+
+  {% if role == "student" %}
+    <p>Welcome, student!</p>
+    <a href="{{ url_for('tools') }}">View tools & quizzes →</a>
+    <h3>Your Licenses</h3>
+    <ul>
+      {% for tool in tools %}
+        <li>
+          <strong>{{ tool.name }}</strong> -
+          {% if lic_map.get(tool.id) %}
+            Licensed ({{ lic_map.get(tool.id).issued_date.strftime("%Y-%m-%d") }})
+          {% else %}
+            Not licensed
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+
+  {% else %}
+    <p>Welcome, teacher!</p>
+    <a href="{{ url_for('tools') }}">Manage tools →</a>
+    <h3>Students</h3>
+    <ul>
+      {% for s in students %}
+        <li>{{ s.username }} -
+          Licenses:
+          <ul>
+            {% for l in s.licenses %}
+              {% if not l.revoked %}
+                <li>{{ l.tool.name }} ({{ l.issued_date.strftime("%Y-%m-%d") }})</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+{% endblock %}

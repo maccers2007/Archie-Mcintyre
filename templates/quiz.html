@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Quiz — {{ tool.name }}</h2>
+  <form method="post">
+    {% for q in questions %}
+      <div class="question">
+        <p><strong>{{ loop.index }}. {{ q.text }}</strong></p>
+        <label><input type="radio" name="q_{{ q.id }}" value="1" required> {{ q.option1 }}</label><br>
+        <label><input type="radio" name="q_{{ q.id }}" value="2"> {{ q.option2 }}</label><br>
+        {% if q.option3 %}<label><input type="radio" name="q_{{ q.id }}" value="3"> {{ q.option3 }}</label><br>{% endif %}
+        {% if q.option4 %}<label><input type="radio" name="q_{{ q.id }}" value="4"> {{ q.option4 }}</label><br>{% endif %}
+      </div>
+      <hr>
+    {% endfor %}
+    <button type="submit">Submit Quiz</button>
+  </form>
+{% endblock %}
