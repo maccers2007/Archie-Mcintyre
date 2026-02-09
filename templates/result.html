@@ -6,5 +6,13 @@
   <p>Score: {{ "%.1f"|format(result.score) }}%</p>
   <p>Status: {% if result.passed %}Passed ✅{% else %}Failed ❌{% endif %}</p>
   <p>Date: {{ result.date.strftime("%Y-%m-%d %H:%M") }}</p>
+  {% if learning_path %}
+    <h3>Recommended Learning Path</h3>
+    <ol>
+      {% for item in learning_path %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ol>
+  {% endif %}
   <a href="{{ url_for('dashboard') }}">Back to dashboard</a>
 {% endblock %}
