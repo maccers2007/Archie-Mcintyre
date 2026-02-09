@@ -5,10 +5,10 @@
     {% for q in questions %}
       <div class="question">
         <p><strong>{{ loop.index }}. {{ q.text }}</strong></p>
-        <label><input type="radio" name="q_{{ q.id }}" value="1" required> {{ q.option1 }}</label><br>
-        <label><input type="radio" name="q_{{ q.id }}" value="2"> {{ q.option2 }}</label><br>
-        {% if q.option3 %}<label><input type="radio" name="q_{{ q.id }}" value="3"> {{ q.option3 }}</label><br>{% endif %}
-        {% if q.option4 %}<label><input type="radio" name="q_{{ q.id }}" value="4"> {{ q.option4 }}</label><br>{% endif %}
+        <label><input type="radio" name="q_{{ q.id }}" value="A" required> {{ q.option_a }}</label><br>
+        <label><input type="radio" name="q_{{ q.id }}" value="B"> {{ q.option_b }}</label><br>
+        {% if q.option_c %}<label><input type="radio" name="q_{{ q.id }}" value="C"> {{ q.option_c }}</label><br>{% endif %}
+        {% if q.option_d %}<label><input type="radio" name="q_{{ q.id }}" value="D"> {{ q.option_d }}</label><br>{% endif %}
       </div>
       <hr>
     {% endfor %}
