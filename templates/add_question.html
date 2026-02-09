@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="
+    max-width: 700px;
+    margin: 80px auto;
+    background-color: #f9f9ff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+">
+    <h2 style="font-family: 'Segoe UI', sans-serif; font-size: 26px; color: #333;">
+        Add Question for {{ tool.name }}
+    </h2>
+
+    <form method="POST" style="text-align: left; margin-top: 20px;">
+        <label><strong>Question Text:</strong></label><br>
+        <input type="text" name="text" required style="width:100%; padding:8px; margin-bottom:12px; border-radius:8px; border:1px solid #ccc;">
+
+        <label><strong>Option A:</strong></label><br>
+        <input type="text" name="option_a" required style="width:100%; padding:8px; margin-bottom:12px; border-radius:8px; border:1px solid #ccc;">
+
+        <label><strong>Option B:</strong></label><br>
+        <input type="text" name="option_b" required style="width:100%; padding:8px; margin-bottom:12px; border-radius:8px; border:1px solid #ccc;">
+
+        <label><strong>Option C:</strong></label><br>
+        <input type="text" name="option_c" required style="width:100%; padding:8px; margin-bottom:12px; border-radius:8px; border:1px solid #ccc;">
+
+        <label><strong>Option D:</strong></label><br>
+        <input type="text" name="option_d" required style="width:100%; padding:8px; margin-bottom:12px; border-radius:8px; border:1px solid #ccc;">
+
+        <label><strong>Image Filename (optional):</strong></label><br>
+        <input type="text" name="image_filename" placeholder="lathe.jpg" style="width:100%; padding:8px; margin-bottom:12px; border-radius:8px; border:1px solid #ccc;">
+
+        <label><strong>Correct Answer:</strong></label><br>
+        <select name="correct_answer" required style="width:100%; padding:8px; margin-bottom:20px; border-radius:8px; border:1px solid #ccc;">
+            <option value="">Select Correct Answer</option>
+            <option value="A">Option A</option>
+            <option value="B">Option B</option>
+            <option value="C">Option C</option>
+            <option value="D">Option D</option>
+        </select>
+
+        <button type="submit" style="
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        ">Add Question</button>
+    </form>
+
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('tools') }}" style="color: #4CAF50;">← Back to Tools</a>
+    </div>
+</div>
+{% endblock %}
+

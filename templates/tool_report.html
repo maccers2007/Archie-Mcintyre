@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Analytics for {{ tool.name }}</h2>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Question</th>
+        <th>Total Attempts</th>
+        <th>Correct Answers</th>
+        <th>Success Rate (%)</th>
+    </tr>
+
+    {% for row in data %}
+    <tr>
+        <td>{{ row.question_text }}</td>
+        <td>{{ row.attempts }}</td>
+        <td>{{ row.correct_count }}</td>
+        <td>
+            {% if row.attempts > 0 %}
+            {{ (row.correct_count / row.attempts * 100) | round(1) }}
+            {% else %}
+            0
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{{ url_for('tools') }}">Back</a>
+{% endblock %}

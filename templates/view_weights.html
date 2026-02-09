@@ -1,0 +1,7 @@
+<h2>Weight results for {{ tool.name }}</h2>
+
+<ul>
+  {% for w in weights %}
+    <li>{{ w.student_name }} — weight score: {{ w.weight }}</li>
+  {% endfor %}
+</ul>

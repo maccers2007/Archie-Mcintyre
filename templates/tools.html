@@ -15,11 +15,38 @@
     {% for t in tools %}
       <li>
         <strong>{{ t.name }}</strong> - {{ t.description }}<br>
+
         {% if session.role == 'student' %}
           <a href="{{ url_for('quiz', tool_id=t.id) }}">Take quiz</a>
         {% endif %}
+
         {% if session.role == 'teacher' %}
-          <small> ({{ t.questions|length }} questions)</small>
+          <small> ({{ t.questions|length }} questions)</small><br>
+          <a href="{{ url_for('add_question', tool_id=t.id) }}">Add Question</a>
+         
+           {% if role == "teacher" %}
+           <a href="{{ url_for('weight_dashboard', tool_id=t.id) }}" class="btn btn-warning btn-sm">
+           View Weights
+           </a>
+           {% endif %}
+          
+          <a href="{{ url_for('tool_report', tool_id=t.id) }}" class="btn btn-warning btn-sm">
+          View Analytics
+          </a>
+
+          
+          {% if t.questions|length > 0 %}
+            <ul style="margin-top: 10px;">
+              {% for q in t.questions %}
+                <li>
+                  <strong>Q{{ loop.index }}:</strong> {{ q.text }}
+                  <form method="POST" action="{{ url_for('delete_question', question_id=q.id) }}" style="display:inline;">
+                    <button type="submit" style="background-color: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;" onclick="return confirm('Delete this question?')">Delete</button>
+                  </form>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
         {% endif %}
       </li>
     {% endfor %}

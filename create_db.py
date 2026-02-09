@@ -33,3 +33,16 @@ with app.app_context():
         print("Sample tools and questions added.")
     else:
         print("Tools already exist.")
+
+class Tool(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(255), nullable=False)
+    questions = db.relationship("Question", backref="tool", lazy=True)
+
+class Question(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(255), nullable=False)
+    answer = db.Column(db.String(100), nullable=False)
+    tool_id = db.Column(db.Integer, db.ForeignKey("tool.id"), nullable=False)
+

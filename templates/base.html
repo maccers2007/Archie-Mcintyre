@@ -1,32 +1,35 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Safety Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <nav>
     <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('tools') }}">Tools</a>
     {% if 'user_id' in session %}
-      | <a href="{{ url_for('tools') }}">Tools</a>
-      | <a href="{{ url_for('logout') }}">Logout</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
     {% else %}
-      | <a href="{{ url_for('login') }}">Login</a>
-      | <a href="{{ url_for('register') }}">Register</a>
+      <a href="{{ url_for('login') }}">Login</a>
+      <a href="{{ url_for('register') }}">Register</a>
     {% endif %}
   </nav>
-  <hr>
+
   <div class="container">
     {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <ul class="flashes">
-          {% for m in messages %}
-            <li>{{ m }}</li>
+        <ul class="flash">
+          {% for msg in messages %}
+            <li>{{ msg }}</li>
           {% endfor %}
         </ul>
       {% endif %}
     {% endwith %}
+
     {% block content %}{% endblock %}
   </div>
 </body>

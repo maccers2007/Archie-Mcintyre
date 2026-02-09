@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Question Weights for {{ tool.name }}</h2>
+<p>Higher weight = students struggle more</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Question</th>
+            <th>Weight</th>
+            <th>Difficulty</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for q in questions %}
+        <tr>
+            <td>{{ q.id }}</td>
+            <td>{{ q.text }}</td>
+            <td>{{ q.weight }}</td>
+            <td>
+                {% if q.weight >= 6 %}
+                    🔥 High
+                {% elif q.weight >= 3 %}
+                    ⚠️ Medium
+                {% else %}
+                    🙂 Low
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('tools') }}" class="btn btn-secondary mt-3">Back to Tools</a>
+
+{% endblock %}

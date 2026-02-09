@@ -1,17 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>Quiz — {{ tool.name }}</h2>
-  <form method="post">
-    {% for q in questions %}
-      <div class="question">
-        <p><strong>{{ loop.index }}. {{ q.text }}</strong></p>
-        <label><input type="radio" name="q_{{ q.id }}" value="1" required> {{ q.option1 }}</label><br>
-        <label><input type="radio" name="q_{{ q.id }}" value="2"> {{ q.option2 }}</label><br>
-        {% if q.option3 %}<label><input type="radio" name="q_{{ q.id }}" value="3"> {{ q.option3 }}</label><br>{% endif %}
-        {% if q.option4 %}<label><input type="radio" name="q_{{ q.id }}" value="4"> {{ q.option4 }}</label><br>{% endif %}
-      </div>
-      <hr>
-    {% endfor %}
-    <button type="submit">Submit Quiz</button>
-  </form>
+<div class="container" style="
+    max-width: 700px;
+    margin: 80px auto;
+    background-color: #f9f9ff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+">
+    <h2>{{ tool.name }} Quiz</h2>
+    <form method="POST" style="text-align:left;">
+        {% for q in questions %}
+        <div style="margin-bottom: 25px;">
+            <p><strong>{{ loop.index }}. {{ q.text }}</strong></p>
+
+            {% if q.image_filename %}
+                <img src="{{ url_for('static', filename=q.image_filename) }}" 
+                     alt="Question image" style="max-width:100%; border-radius:10px; margin-top: 10px; margin-right:200px;">
+            {% endif %}
+
+
+            <label><input type="radio" name="{{ q.id }}" value="A" required> A) {{ q.option_a }}</label><br>
+            <label><input type="radio" name="{{ q.id }}" value="B"> B) {{ q.option_b }}</label><br>
+            <label><input type="radio" name="{{ q.id }}" value="C"> C) {{ q.option_c }}</label><br>
+            <label><input type="radio" name="{{ q.id }}" value="D"> D) {{ q.option_d }}</label><br>
+            
+        </div>
+        {% endfor %}
+        <button type="submit" style="
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+        ">Submit</button>
+    </form>
+</div>
 {% endblock %}

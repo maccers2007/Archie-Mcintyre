@@ -1,10 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>Result</h2>
-  <p>User: {{ result.user.username }}</p>
-  <p>Tool: {{ result.tool.name }}</p>
-  <p>Score: {{ "%.1f"|format(result.score) }}%</p>
-  <p>Status: {% if result.passed %}Passed ✅{% else %}Failed ❌{% endif %}</p>
-  <p>Date: {{ result.date.strftime("%Y-%m-%d %H:%M") }}</p>
-  <a href="{{ url_for('dashboard') }}">Back to dashboard</a>
+<div class="container" style="
+    max-width: 600px;
+    margin: 100px auto;
+    background-color: #f9f9ff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+">
+    <h2 style="font-family: 'Segoe UI', sans-serif; font-size: 28px; color: #333;">
+        {{ tool.name }} Quiz Result
+    </h2>
+
+    <p style="font-size: 18px; margin-top: 20px; color: #444;">
+        You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
+    </p>
+
+    {% if score == total %}
+        <p style="color: #2e7d32; font-weight: bold;">Excellent work! 🏆</p>
+    {% elif score >= total / 2 %}
+        <p style="color: #f9a825; font-weight: bold;">Good job, but there’s room for improvement 💪</p>
+    {% else %}
+        <p style="color: #d32f2f; font-weight: bold;">Keep practising — you'll get there! 📘</p>
+    {% endif %}
+
+    <div style="margin-top: 30px;">
+        <a href="{{ url_for('tools') }}" style="
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+        ">Back to Tools</a>
+    </div>
+</div>
 {% endblock %}
